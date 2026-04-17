@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emy.gourmandises - Connexion</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="hero-photo">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80" alt="Pastry display" />
+    </div>
+    <div class="auth-container">
+        <div class="auth-card">
+            <!-- Logo/Header -->
+            <div class="auth-header">
+                <h1>Emy.gourmandises</h1>
+                <p>Bienvenue dans votre espace pâtisserie. Connectez-vous pour savourer chaque création.</p>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="auth-form active">
+                <h2>Login</h2>
+                
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input 
+                        type="email" 
+                        id="loginEmail" 
+                        name="email" 
+                        placeholder="Enter your email" 
+                        required
+                    >
+                    <span class="error-message" id="loginEmailError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <div class="password-field">
+                        <input 
+                            type="password" 
+                            id="loginPassword" 
+                            name="password" 
+                            placeholder="Enter your password" 
+                            required
+                        >
+                        <button type="button" class="toggle-password" data-target="loginPassword">
+                            <span>👁️</span>
+                        </button>
+                    </div>
+                    <span class="error-message" id="loginPasswordError"></span>
+                </div>
+
+                <div class="remember-forgot">
+                    <label class="checkbox">
+                        <input type="checkbox" name="remember" id="rememberMe">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="submit-btn">Login</button>
+
+                <div class="form-divider">or</div>
+
+                <div class="social-auth">
+                    <button type="button" class="social-btn google">
+                        <span>📧</span> Google
+                    </button>
+                    <button type="button" class="social-btn github">
+                        <span>🐙</span> GitHub
+                    </button>
+                </div>
+
+                <p class="form-footer">
+                    Don't have an account? 
+                    <a href="#" class="toggle-form" data-form="signup">Sign up</a>
+                </p>
+            </form>
+
+            <!-- Signup Form -->
+            <form id="signupForm" class="auth-form">
+                <h2>Create Account</h2>
+
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input 
+                        type="text" 
+                        id="signupName" 
+                        name="name" 
+                        placeholder="Enter your full name" 
+                        required
+                    >
+                    <span class="error-message" id="signupNameError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input 
+                        type="email" 
+                        id="signupEmail" 
+                        name="email" 
+                        placeholder="Enter your email" 
+                        required
+                    >
+                    <span class="error-message" id="signupEmailError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <div class="password-field">
+                        <input 
+                            type="password" 
+                            id="signupPassword" 
+                            name="password" 
+                            placeholder="Create a strong password" 
+                            required
+                        >
+                        <button type="button" class="toggle-password" data-target="signupPassword">
+                            <span>👁️</span>
+                        </button>
+                    </div>
+                    <div class="password-strength">
+                        <div class="strength-bar">
+                            <div class="strength-fill"></div>
+                        </div>
+                        <p class="strength-text">Password strength: <span>Weak</span></p>
+                    </div>
+                    <span class="error-message" id="signupPasswordError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="signupConfirmPassword">Confirm Password</label>
+                    <div class="password-field">
+                        <input 
+                            type="password" 
+                            id="signupConfirmPassword" 
+                            name="confirmPassword" 
+                            placeholder="Confirm your password" 
+                            required
+                        >
+                        <button type="button" class="toggle-password" data-target="signupConfirmPassword">
+                            <span>👁️</span>
+                        </button>
+                    </div>
+                    <span class="error-message" id="signupConfirmPasswordError"></span>
+                </div>
+
+                <label class="checkbox">
+                    <input type="checkbox" name="terms" id="termsCheckbox" required>
+                    <span>I agree to the <a href="#">Terms & Conditions</a></span>
+                </label>
+                <span class="error-message" id="signupTermsError"></span>
+
+                <button type="submit" class="submit-btn">Create Account</button>
+
+                <p class="form-footer">
+                    Already have an account? 
+                    <a href="#" class="toggle-form" data-form="login">Login</a>
+                </p>
+            </form>
+
+            <!-- Success Message -->
+            <div id="successMessage" class="success-message">
+                <span class="success-icon">✓</span>
+                <p id="successText"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+</body>
+</html>

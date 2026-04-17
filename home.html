@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - Emy.gourmandises</title>
+    <link rel="stylesheet" href="home-style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="auth-header">
+        <h1><i class="fas fa-utensils"></i> Emy.gourmandises</h1>
+        <p class="brand-subtitle">Cuisine marocaine & pâtisseries artisanales</p>
+        <div class="auth-nav">
+            <a href="home.html" class="nav-link active"><i class="fas fa-home"></i> Accueil</a>
+            <a href="menu.html" class="nav-link"><i class="fas fa-utensils"></i> Menu</a>
+            <a href="orders.html" class="nav-link"><i class="fas fa-shopping-cart"></i> Mes commandes</a>
+            <button id="logoutBtn" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Déconnexion</button>
+        </div>
+    </div>
+
+    <div class="hero-photo">
+        <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=1200&q=80" alt="Gourmand pastry display" />
+    </div>
+
+    <div class="container">
+        <div class="welcome-section">
+            <div class="welcome-card">
+                <div class="welcome-icon">🧁</div>
+                <h2>Bonjour, <span id="userName"></span> !</h2>
+                <p class="brand-intro">Emy.gourmandises propose des plats marocains savoureux, des pâtisseries délicates et plusieurs variétés disponibles sur commande.</p>
+                <div class="welcome-actions">
+                    <a href="menu.html" class="action-btn primary">
+                        <i class="fas fa-utensils"></i> Voir le menu
+                    </a>
+                    <a href="orders.html" class="action-btn secondary">
+                        <i class="fas fa-shopping-cart"></i> Mes commandes
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="features-section">
+            <h3>Découvrez nos services</h3>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🍽️</div>
+                    <h4>Plats marocains</h4>
+                    <p>Tagine, couscous et pastilla préparés avec des ingrédients frais et authentiques</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🧁</div>
+                    <h4>Pâtisseries artisanales</h4>
+                    <p>Cornes de gazelle, chebakia et gâteaux maison préparés avec amour</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🚚</div>
+                    <h4>Livraison à domicile</h4>
+                    <p>Commandez en ligne et recevez vos plats préférés chez vous</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⭐</div>
+                    <h4>Avis clients</h4>
+                    <p>Lisez les commentaires de nos clients satisfaits</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="home.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "emy-gourmandises",
+  "version": "1.0.0",
+  "description": "Emy.gourmandises authentication front-end with SQLite backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "seed": "node seed.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6"
+  }
+}
+

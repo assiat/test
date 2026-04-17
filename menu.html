@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Emy.gourmandises</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="auth-header">
+        <h1><i class="fas fa-utensils"></i> Emy.gourmandises</h1>
+        <p class="brand-subtitle">Cuisine marocaine & pâtisseries artisanales</p>
+        <div class="auth-nav">
+            <a href="home.html" class="nav-link"><i class="fas fa-home"></i> Accueil</a>
+            <a href="menu.html" class="nav-link active"><i class="fas fa-utensils"></i> Menu</a>
+            <a href="orders.html" class="nav-link"><i class="fas fa-shopping-cart"></i> Mes commandes</a>
+            <button id="logoutBtn" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Déconnexion</button>
+        </div>
+    </div>
+
+    <div class="hero-section">
+        <div class="hero-content">
+            <h2>Notre Menu</h2>
+            <p>Découvrez nos spécialités marocaines et pâtisseries artisanales</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="menu-section">
+            <div class="menu-filters">
+                <button class="filter-btn active" data-category="all">Tous</button>
+                <button class="filter-btn" data-category="marocain">Plats marocains</button>
+                <button class="filter-btn" data-category="patisserie">Pâtisseries</button>
+            </div>
+
+            <div id="dishesContainer" class="dishes-grid">
+                <!-- Les plats seront chargés ici -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour les détails du plat -->
+    <div id="dishModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="dishDetails">
+                <!-- Détails du plat -->
+            </div>
+        </div>
+    </div>
+
+    <script src="menu.js"></script>
+</body>
+</html>
