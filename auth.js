@@ -332,6 +332,9 @@ class AuthManager {
         successText.innerHTML = `${message}<br><small style="opacity: 0.7; margin-top: 10px; display: block;">Redirecting to home page...</small>`;
         successDiv.classList.add('show');
 
+        // Marquer que on est en navigation pour éviter le logout au beforeunload
+        localStorage.setItem('_navigatingAfterLogin', '1');
+        
         setTimeout(() => {
             window.location.href = 'home.html';
         }, 2000);
@@ -351,7 +354,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const auth = new AuthManager();
     window.authManager = auth;
 
+    // Vérifier si c'est une navigation après login
+    const isNavigatingAfterLogin = localStorage.getItem('_navigatingAfterLogin') === '1';
+    if (isNavigatingAfterLogin) {
+        localStorage.removeItem('_navigatingAfterLogin');
+        return; // Ne pas se logout si on vient de se connecter
+    }
+
     window.addEventListener('beforeunload', () => {
+        // Ne pas logout si on vient de se connecter (flag défini)
+        if (localStorage.getItem('_navigatingAfterLogin') === '1') {
+            return;
+        }
         if (!auth.currentUser?.rememberMe) {
             auth.logout();
         }
