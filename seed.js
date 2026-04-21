@@ -1,5 +1,10 @@
 // Script pour ajouter des plats de démonstration
 const db = require('./db');
+const crypto = require('crypto');
+
+function hashPassword(password) {
+    return crypto.createHash('sha256').update(password + 'EmyGourmandisesSalt').digest('hex');
+}
 
 async function seedDishes() {
     const dishes = [
@@ -102,7 +107,35 @@ async function seedDeliveryZones() {
     }
 }
 
+async function seedUsers() {
+    const users = [
+        { name: 'Alice Dupont', email: 'alice@example.com', password: 'password123' },
+        { name: 'Bob Martin', email: 'bob@example.com', password: 'password123' },
+        { name: 'Admin Emy', email: 'admin@emy.gourmandises', password: 'admin123' }
+    ];
+
+    try {
+        for (const userData of users) {
+            try {
+                const passwordHash = hashPassword(userData.password);
+                await db.createUser(userData.name, userData.email, passwordHash);
+                console.log(`Added user: ${userData.email}`);
+            } catch (error) {
+                if (error.message.includes('UNIQUE constraint failed')) {
+                    console.log(`User ${userData.email} already exists`);
+                } else {
+                    throw error;
+                }
+            }
+        }
+        console.log('Demo users seeded successfully!');
+    } catch (error) {
+        console.error('Error seeding users:', error);
+    }
+}
+
 async function main() {
+    await seedUsers();
     await seedDishes();
     await seedDeliveryZones();
 }

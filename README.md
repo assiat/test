@@ -32,6 +32,14 @@ npm start
 
 Ouvre ensuite `http://localhost:3000/index.html` dans ton navigateur.
 
+## Comptes de démonstration
+
+Après avoir exécuté `npm run seed`, vous pouvez vous connecter avec ces comptes de test :
+
+- **alice@example.com** / password123
+- **bob@example.com** / password123  
+- **admin@emy.gourmandises** / admin123
+
 ## API Endpoints
 
 ### Utilisateurs
