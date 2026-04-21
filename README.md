@@ -32,6 +32,14 @@ npm start
 
 Ouvre ensuite `http://localhost:3000/index.html` dans ton navigateur.
 
+## Comptes de démonstration
+
+Après avoir exécuté `npm run seed`, vous pouvez vous connecter avec ces comptes de test :
+
+- **alice@example.com** / password123
+- **bob@example.com** / password123  
+- **admin@emy.gourmandises** / admin123
+
 ## API Endpoints
 
 ### Utilisateurs
@@ -47,6 +55,13 @@ Ouvre ensuite `http://localhost:3000/index.html` dans ton navigateur.
 - `POST /api/orders` - Créer une commande (auth requis)
 - `GET /api/orders` - Lister ses commandes (auth requis)
 - `GET /api/orders/:id` - Détails d'une commande (auth requis)
+
+### Zones de livraison
+- `GET /api/delivery-zones` - Lister toutes les zones de livraison
+- `GET /api/delivery-zones/:id` - Détails d'une zone de livraison
+- `POST /api/delivery-zones` - Ajouter une zone de livraison (auth requis)
+- `PUT /api/delivery-zones/:id` - Modifier une zone de livraison (auth requis)
+- `DELETE /api/delivery-zones/:id` - Supprimer une zone de livraison (auth requis)
 
 ### Avis
 - `POST /api/reviews` - Ajouter un avis (auth requis)

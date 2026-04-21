@@ -13,7 +13,7 @@ class MenuManager {
     }
 
     checkAuth() {
-        const user = JSON.parse(localStorage.getItem('user'));
+        const user = JSON.parse(localStorage.getItem('currentUser'));
         if (!user) {
             window.location.href = 'index.html';
             return;
@@ -40,7 +40,7 @@ class MenuManager {
 
         // Déconnexion
         document.getElementById('logoutBtn').addEventListener('click', () => {
-            localStorage.removeItem('user');
+            localStorage.removeItem('currentUser');
             window.location.href = 'index.html';
         });
     }

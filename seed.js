@@ -1,5 +1,10 @@
 // Script pour ajouter des plats de démonstration
 const db = require('./db');
+const crypto = require('crypto');
+
+function hashPassword(password) {
+    return crypto.createHash('sha256').update(password + 'EmyGourmandisesSalt').digest('hex');
+}
 
 async function seedDishes() {
     const dishes = [
@@ -75,4 +80,64 @@ async function seedDishes() {
     }
 }
 
-seedDishes();
+async function seedDeliveryZones() {
+    const zones = [
+        { name: 'Casablanca Centre', deliveryFee: 5.00 },
+        { name: 'Rabat', deliveryFee: 8.00 },
+        { name: 'Marrakech', deliveryFee: 10.00 },
+        { name: 'Fès', deliveryFee: 12.00 },
+        { name: 'Tanger', deliveryFee: 15.00 }
+    ];
+
+    try {
+        // Vérifier si des zones existent déjà
+        const existingZones = await db.getAllDeliveryZones();
+        if (existingZones.length > 0) {
+            console.log('Delivery zones already seeded!');
+            return;
+        }
+
+        for (const zone of zones) {
+            await db.createDeliveryZone(zone.name, zone.deliveryFee);
+            console.log(`Added delivery zone: ${zone.name}`);
+        }
+        console.log('Demo delivery zones seeded successfully!');
+    } catch (error) {
+        console.error('Error seeding delivery zones:', error);
+    }
+}
+
+async function seedUsers() {
+    const users = [
+        { name: 'Alice Dupont', email: 'alice@example.com', password: 'password123' },
+        { name: 'Bob Martin', email: 'bob@example.com', password: 'password123' },
+        { name: 'Admin Emy', email: 'admin@emy.gourmandises', password: 'admin123' }
+    ];
+
+    try {
+        for (const userData of users) {
+            try {
+                const passwordHash = hashPassword(userData.password);
+                await db.createUser(userData.name, userData.email, passwordHash);
+                console.log(`Added user: ${userData.email}`);
+            } catch (error) {
+                if (error.message.includes('UNIQUE constraint failed')) {
+                    console.log(`User ${userData.email} already exists`);
+                } else {
+                    throw error;
+                }
+            }
+        }
+        console.log('Demo users seeded successfully!');
+    } catch (error) {
+        console.error('Error seeding users:', error);
+    }
+}
+
+async function main() {
+    await seedUsers();
+    await seedDishes();
+    await seedDeliveryZones();
+}
+
+main();

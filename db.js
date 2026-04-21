@@ -72,6 +72,17 @@ db.serialize(() => {
             FOREIGN KEY (dishId) REFERENCES dishes (id)
         )
     `);
+
+    // Table zones de livraison
+    db.run(`
+        CREATE TABLE IF NOT EXISTS delivery_zones (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL UNIQUE,
+            deliveryFee REAL DEFAULT 0,
+            available BOOLEAN DEFAULT 1,
+            createdAt TEXT NOT NULL
+        )
+    `);
 });
 
 function run(sql, params = []) {
@@ -240,6 +251,42 @@ module.exports = {
             WHERE r.dishId = ?
             ORDER BY r.createdAt DESC
         `, [dishId]);
+    },
+
+    // Zones de livraison
+    createDeliveryZone: async (name, deliveryFee = 0) => {
+        const createdAt = new Date().toISOString();
+        const result = await run(
+            `INSERT INTO delivery_zones (name, deliveryFee, available, createdAt) VALUES (?, ?, 1, ?)`,
+            [name, deliveryFee, createdAt]
+        );
+        return {
+            id: result.lastID,
+            name,
+            deliveryFee,
+            available: true,
+            createdAt
+        };
+    },
+
+    getAllDeliveryZones: () => {
+        return all(`SELECT * FROM delivery_zones WHERE available = 1 ORDER BY name`);
+    },
+
+    getDeliveryZoneById: (id) => {
+        return get(`SELECT * FROM delivery_zones WHERE id = ? AND available = 1`, [id]);
+    },
+
+    updateDeliveryZone: async (id, name, deliveryFee, available) => {
+        await run(
+            `UPDATE delivery_zones SET name = ?, deliveryFee = ?, available = ? WHERE id = ?`,
+            [name, deliveryFee, available ? 1 : 0, id]
+        );
+        return get(`SELECT * FROM delivery_zones WHERE id = ?`, [id]);
+    },
+
+    deleteDeliveryZone: async (id) => {
+        await run(`UPDATE delivery_zones SET available = 0 WHERE id = ?`, [id]);
     }
 };
 
