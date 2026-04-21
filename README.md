@@ -48,6 +48,13 @@ Ouvre ensuite `http://localhost:3000/index.html` dans ton navigateur.
 - `GET /api/orders` - Lister ses commandes (auth requis)
 - `GET /api/orders/:id` - Détails d'une commande (auth requis)
 
+### Zones de livraison
+- `GET /api/delivery-zones` - Lister toutes les zones de livraison
+- `GET /api/delivery-zones/:id` - Détails d'une zone de livraison
+- `POST /api/delivery-zones` - Ajouter une zone de livraison (auth requis)
+- `PUT /api/delivery-zones/:id` - Modifier une zone de livraison (auth requis)
+- `DELETE /api/delivery-zones/:id` - Supprimer une zone de livraison (auth requis)
+
 ### Avis
 - `POST /api/reviews` - Ajouter un avis (auth requis)
 - `GET /api/dishes/:id/reviews` - Avis d'un plat

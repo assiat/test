@@ -204,6 +204,75 @@ app.get('/api/dishes/:id/reviews', async (req, res) => {
     }
 });
 
+// Routes zones de livraison
+app.post('/api/delivery-zones', requireAuth, async (req, res) => {
+    const { name, deliveryFee } = req.body;
+
+    if (!name) {
+        return res.status(400).json({ error: 'Name is required.' });
+    }
+
+    try {
+        const zone = await db.createDeliveryZone(name, deliveryFee || 0);
+        res.status(201).json(zone);
+    } catch (error) {
+        console.error('Create delivery zone error:', error);
+        res.status(500).json({ error: 'Unable to create delivery zone.' });
+    }
+});
+
+app.get('/api/delivery-zones', async (req, res) => {
+    try {
+        const zones = await db.getAllDeliveryZones();
+        res.json(zones);
+    } catch (error) {
+        console.error('Get delivery zones error:', error);
+        res.status(500).json({ error: 'Unable to fetch delivery zones.' });
+    }
+});
+
+app.get('/api/delivery-zones/:id', async (req, res) => {
+    try {
+        const zone = await db.getDeliveryZoneById(req.params.id);
+        if (!zone) {
+            return res.status(404).json({ error: 'Delivery zone not found.' });
+        }
+        res.json(zone);
+    } catch (error) {
+        console.error('Get delivery zone error:', error);
+        res.status(500).json({ error: 'Unable to fetch delivery zone.' });
+    }
+});
+
+app.put('/api/delivery-zones/:id', requireAuth, async (req, res) => {
+    const { name, deliveryFee, available } = req.body;
+
+    if (!name) {
+        return res.status(400).json({ error: 'Name is required.' });
+    }
+
+    try {
+        const zone = await db.updateDeliveryZone(req.params.id, name, deliveryFee || 0, available !== false);
+        if (!zone) {
+            return res.status(404).json({ error: 'Delivery zone not found.' });
+        }
+        res.json(zone);
+    } catch (error) {
+        console.error('Update delivery zone error:', error);
+        res.status(500).json({ error: 'Unable to update delivery zone.' });
+    }
+});
+
+app.delete('/api/delivery-zones/:id', requireAuth, async (req, res) => {
+    try {
+        await db.deleteDeliveryZone(req.params.id);
+        res.status(204).send();
+    } catch (error) {
+        console.error('Delete delivery zone error:', error);
+        res.status(500).json({ error: 'Unable to delete delivery zone.' });
+    }
+});
+
 // Fallback for API errors
 app.use((req, res) => {
     res.status(404).json({ error: 'Not found.' });

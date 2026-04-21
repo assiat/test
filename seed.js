@@ -75,4 +75,36 @@ async function seedDishes() {
     }
 }
 
-seedDishes();
+async function seedDeliveryZones() {
+    const zones = [
+        { name: 'Casablanca Centre', deliveryFee: 5.00 },
+        { name: 'Rabat', deliveryFee: 8.00 },
+        { name: 'Marrakech', deliveryFee: 10.00 },
+        { name: 'Fès', deliveryFee: 12.00 },
+        { name: 'Tanger', deliveryFee: 15.00 }
+    ];
+
+    try {
+        // Vérifier si des zones existent déjà
+        const existingZones = await db.getAllDeliveryZones();
+        if (existingZones.length > 0) {
+            console.log('Delivery zones already seeded!');
+            return;
+        }
+
+        for (const zone of zones) {
+            await db.createDeliveryZone(zone.name, zone.deliveryFee);
+            console.log(`Added delivery zone: ${zone.name}`);
+        }
+        console.log('Demo delivery zones seeded successfully!');
+    } catch (error) {
+        console.error('Error seeding delivery zones:', error);
+    }
+}
+
+async function main() {
+    await seedDishes();
+    await seedDeliveryZones();
+}
+
+main();
